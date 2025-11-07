@@ -1,0 +1,26 @@
+{
+  "users": {
+    "admin": {
+      "nome": "Admin User",
+      "email": "admin.test@cypress.com",
+      "password": "test123",
+      "administrador": "true"
+    },
+    "regular": {
+      "nome": "Regular User",
+      "email": "user.test@cypress.com", 
+      "password": "test123",
+      "administrador": "false"
+    }
+  },
+  "product": {
+    "nome": "Cypress Test Product",
+    "preco": 100,
+    "descricao": "Product for automated testing",
+    "quantidade": 50
+  },
+  "constants": {
+    "duplicateEmail": "beltrano@qa.com.br",
+    "duplicateProductName": "Logitech MX Vertical"
+  }
+}

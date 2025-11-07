@@ -1,0 +1,33 @@
+{
+  "name": "serverest-automation-tests",
+  "version": "1.0.0",
+  "description": "Automated testing suite for ServeRest application using Cypress",
+  "scripts": {
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "cypress:run:e2e": "cypress run --spec \"cypress/e2e/**/*.cy.js\"",
+    "cypress:run:api": "cypress run --spec \"cypress/api/**/*.cy.js\"",
+    "cypress:run:headed": "cypress run --headed",
+    "test": "cypress run",
+    "test:e2e": "npm run cypress:run:e2e",
+    "test:api": "npm run cypress:run:api"
+  },
+  "keywords": [
+    "cypress",
+    "automation",
+    "testing",
+    "e2e",
+    "api",
+    "serverest"
+  ],
+  "author": "Alan",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lanmelooo/k2-test"
+  },
+  "devDependencies": {
+    "cypress": "^13.6.0",
+    "@faker-js/faker": "^8.3.1"
+  }
+}
