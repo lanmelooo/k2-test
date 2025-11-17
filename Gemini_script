@@ -102,11 +102,14 @@ Não explique o que está fazendo. Apenas entregue o conteúdo nos blocos descri
 
 
 
-"terminal.integrated.profiles.windows": {
-    "Git Bash": {
-        "path": "C:\\Program Files\\Git\\bin\\bash.exe",
-        "args": ["--login", "-i"]
-    }
-},
-"terminal.integrated.defaultProfile.windows": "Git Bash"
+{
+    "terminal.integrated.profiles.windows": {
+        "Git Bash": {
+            "path": "C:\\Users\\p0666050\\AppData\\Local\\Programs\\Git\\git-bash.exe",
+            "args": ["--cd-to-home"]
+        }
+    },
+    "terminal.integrated.defaultProfile.windows": "Git Bash"
+}
+
 
