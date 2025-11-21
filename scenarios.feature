@@ -167,3 +167,75 @@ Funcionalidade: Consulta de Status Pix via Polling Itaú
     Quando o Orquestrador tentar consultar o PSP e ocorrer indisponibilidade
     Então o Circuit Breaker deve impedir múltiplas chamadas
     E o erro deve ser registrado em log
+
+
+✅ Legenda
+
+Alta prioridade → deve ser automatizado
+
+Média prioridade → automatizar apenas com mock
+
+Baixa prioridade → não vale a pena automatizar
+
+1️⃣ MDPO-4007 — Geração de Pix (COBV)
+Cenário	Prioridade	Automatização	Justificativa
+Gerar Pix com Txid / QR Code / Payload	⭐ Alta	Sim	Determinístico e essencial para contrato Itaú
+Itaú indisponível	⭐ Alta	Sim	Critério de fallback / resiliência
+Respeitar dados enviados pelo cliente	⭐ Alta	Sim	Validação de payload → perfeiro para automação
+
+Automatizáveis: 3 de 3
+
+2️⃣ MDPO-4008 — Cancelamento de Pix
+Cenário	Prioridade	Automatização	Justificativa
+Cancelamento com sucesso	⭐ Alta	Sim	Fluxo crítico
+Cancelamento recusado (já pago/cancelado)	⭐ Alta	Sim	Erro funcional explícito do Itaú
+Itaú indisponível (3 tentativas)	⭐ Alta	Sim	Regra de tentativas → automatização ideal
+
+Automatizáveis: 3 de 3
+
+3️⃣ MDPO-4009 — Liquidação de Pix via Webhook Itaú
+Cenário	Prioridade	Automatização	Justificativa
+Webhook “CONCLUIDA” → atualizar para PAGO	⚠ Média	Sim (com mock)	Webhook real é instável; simular é perfeito
+Webhook inválido / falha segurança	⚠ Média	Sim (com mock)	Garantir rejeição / 400
+Responder 200 OK imediatamente	🔸 Baixa	Não	Sem valor prático / comportamento assíncrono
+
+Automatizáveis: 2 com mock + 1 não recomendada
+
+4️⃣ MDPO-4010 — Scheduler / Polling de Status
+Cenário	Prioridade	Automatização	Justificativa
+CONCLUIDA → PAGO	⭐ Alta	Sim (mock PSP)	Lógica interna estável
+REMOVIDO → BAIXADO	⭐ Alta	Sim (mock PSP)	Atualização determinística
+Status ATIVA sem alteração	⭐ Alta	Sim (mock PSP)	Regra simples
+Falha PSP (Circuit Breaker)	🔸 Baixa	Não	Comportamento de infra / tempo
+
+Automatizáveis: 3 de 4 (com mock)
+
+🧮 TOTAL GERAL
+Categoria	Quantidade
+⭐ Alta prioridade (automatizar)	8 cenários
+⚠ Média prioridade (mock necessário)	2 cenários
+🔸 Baixa prioridade (não automatizar)	3 cenários
+Total de cenários mapeados	13
+🎯 Conclusão para o PO / SM
+
+8 cenários entregam valor direto e devem ser automatizados.
+
+2 devem ser automatizados somente com mock (Webhook / PSP).
+
+3 não valem a pena automatizar — alta instabilidade, baixo retorno.
+
+O conjunto automatizável cobre:
+
+geração
+
+cancelamento
+
+validações estruturais de payload
+
+atualização de status
+
+resiliência/fallback
+
+erros funcionais explícitos do Itaú
+
+O time garante excelente cobertura com foco em valor.
